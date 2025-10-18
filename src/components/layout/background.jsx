@@ -4,7 +4,7 @@ import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-function DarkBackground() {
+function BackgroundShaders() {
   const material = useRef(null);
 
   const shaderArgs = useMemo(() => ({
@@ -88,7 +88,7 @@ export default function Background() {
   return (
     <div className="fixed top-0 left-0 w-full h-full -z-20 bg-[#030617]">
       <Canvas>
-        <DarkBackground />
+        <BackgroundShaders />
       </Canvas>
     </div>
   );
