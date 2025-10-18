@@ -1,5 +1,7 @@
 import { Delius } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
+import Background from "@/components/layout/background";
+import Cursor from "@/components/cursor";
 import "./globals.css";
 
 const DeliusFont = Delius({
@@ -23,6 +25,9 @@ export default function RootLayout({ children }) {
         className={`${DeliusFont.variable} antialiased`}
       >
         <Navbar/>
+        <Background/>
+        <Cursor/>
+
         {children}
       </body>
     </html>

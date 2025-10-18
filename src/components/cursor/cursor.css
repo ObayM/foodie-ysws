@@ -1,0 +1,38 @@
+body {
+  cursor: none;
+}
+
+
+.food-cursor.hidden {
+    opacity: 0;
+}
+
+.food-cursor-emoji {
+    display: inline-block;
+    animation: bounce 1s infinite alternate;
+}
+
+.food-trail {
+  animation: spit-out 0.8s ease-out forwards;
+}
+
+@keyframes bounce {
+    from {
+        transform: scale(1) rotate(-5deg);
+    }
+    to {
+        transform: scale(1.1) rotate(5deg);
+    }
+}
+
+
+@keyframes spit-out {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 50%) scale(0.3) rotate(180deg);
+  }
+}

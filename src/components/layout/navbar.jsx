@@ -39,7 +39,7 @@ const Navbar = () => {
   return (
     <nav className="shadow-xl sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           
           <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
             <Link href="" className="flex items-center space-x-3">
@@ -48,7 +48,7 @@ const Navbar = () => {
                 alt="Foodie Logo"
                 className='h-14 w-auto drop-shadow-lg'
               />
-              <span className=" text-3xl font-bold tracking-wider drop-shadow-md">
+              <span className=" text-3xl font-bold tracking-wider drop-shadow-md text-blue-700">
                 Foodie
               </span>
             </Link>
