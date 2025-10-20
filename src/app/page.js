@@ -9,6 +9,7 @@ import HeroSection from "@/components/hero";
 import HowItWorksSection from "@/components/howItWorks";
 import RulesSection from "@/components/rules";
 import FAQSection from "@/components/faq";
+import Footer from "@/components/layout/footer";
 
 export default function Home() {
   const lenisRef= useRef(null);
@@ -20,7 +21,7 @@ export default function Home() {
     function raf(time) {
 
       lenis.raf(time);
-      
+
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
@@ -43,6 +44,7 @@ export default function Home() {
           <HowItWorksSection />
           <RulesSection />
           <FAQSection />
+          <Footer />
         </main>
       </ReactLenis>
     </LoadingScreen>
