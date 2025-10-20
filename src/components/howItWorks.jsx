@@ -44,7 +44,7 @@ export default function HowItWorksSection() {
     const activeStep = howItWorksSteps[activeIndex];
 
     return (
-        <div className="  min-h-screen flex flex-col items-center justify-center py-20 px-4 overflow-hidden">
+        <div id='how-it-works' className="  min-h-screen flex flex-col items-center justify-center py-20 px-4 overflow-hidden">
             <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-blue-900">
                     The Process :)

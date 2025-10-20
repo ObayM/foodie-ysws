@@ -74,7 +74,7 @@ const FAQItem = ({ faq }) => {
 
 export default function FAQSection() {
   return (
-    <section className="faq-section py-24 min-h-screen ">
+    <section id="faq" className=" py-24 min-h-screen ">
         <div className="container mx-auto px-6 max-w-3xl">
             <h2 className="text-5xl md:text-6xl font-bold text-center mb-12 text-blue-900">
                 Frequently Asked Questions

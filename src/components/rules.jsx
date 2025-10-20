@@ -92,7 +92,7 @@ export default function RulesSection(){
     }, { scope: container });
 
     return (
-        <div ref={container} className="rules-section min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden">
+        <div id='rules' ref={container} className="rules-section min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden">
             
             <h2 className='rules-heading text-6xl font-bold mb-24 text-center text-blue-800'>Rules</h2>
             

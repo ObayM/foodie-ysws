@@ -4,6 +4,10 @@ body{
   font-family: var(--font-delius);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @keyframes heartbeat {
   0%, 100% {
     transform: scale(1);

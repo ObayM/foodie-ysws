@@ -1,95 +1,123 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { IoRestaurantOutline, IoListCircleOutline, IoHelpCircleOutline } from "react-icons/io5";
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 
+
+const navLinks = [
+  { name: 'How It Works', href: '#how-it-works', icon: IoRestaurantOutline },
+  { name: 'Rules', href: '#rules', icon: IoListCircleOutline },
+  { name: 'FAQ', href: '#faq', icon: IoHelpCircleOutline },
+];
+
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState(null);
 
-  const navLinks = [
-    { name: 'How It Works', href: '#' },
-    { name: 'Rules', href: '#' },
-    { name: 'FAQ', href: '#' },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const menuVariants = {
+  const mobileMenuVariants = {
     hidden: { 
       opacity: 0, 
-      y: -20,
-      transition: { duration: 0.2, ease: 'easeInOut' }
+      y: '-100%',
+      transition: { duration: 0.3, ease: 'easeInOut' }
     },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: { 
-        duration: 0.3, 
-        ease: 'easeInOut',
-        staggerChildren: 0.1 
+        duration: 0.4, 
+        ease: [0.6, 0.05, -0.01, 0.9],
+        staggerChildren: 0.08 
       }
     },
   };
 
-  const linkVariants = {
-    hidden: { opacity: 0, y: -10 },
-    visible: { opacity: 1, y: 0 },
+  const mobileLinkVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 },
   };
 
-
   return (
-    <nav className="shadow-xl sticky top-0 z-50">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           
-          <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
-            <Link href="" className="flex items-center space-x-3">
+          <motion.div
+            whileHover={{ rotate: [0, -5, 5, -5, 0], scale: 1.05 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link href="/" className="flex items-center space-x-2">
               <img 
                 src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/e4fa304e4c87fe02122d84851f4fe60d04216443_image.png" 
                 alt="Foodie Logo"
-                className='h-14 w-auto drop-shadow-lg'
+                className='h-16 w-auto drop-shadow-lg'
               />
-              <span className=" text-3xl font-bold tracking-wider drop-shadow-md text-blue-700">
-                Foodie
+              <span className="text-4xl font-extrabold tracking-tight drop-shadow-md bg-gradient-to-r from-blue-700 to-sky-600 bg-clip-text text-transparent">
+                Foodie 
               </span>
             </Link>
           </motion.div>
 
-          <div className="hidden md:flex items-center space-x-2">
+          <div 
+            className="hidden md:flex items-center space-x-2 bg-white/60 p-2 rounded-full shadow-inner"
+            onMouseLeave={() => setHoveredLink(null)} 
+          >
             {navLinks.map((link) => (
-              <motion.a
+              <Link
                 key={link.name}
                 href={link.href}
-                whileHover={{ y: -3 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-                className=" hover:text-slate-800 font-semibold transition-colors duration-300 px-4 py-2 rounded-md relative group"
+                className="relative px-4 py-2 text-sm font-semibold text-slate-700 transition-colors duration-300 z-10"
+                onMouseEnter={() => setHoveredLink(link.name)}
               >
-                {link.name}
-                <span className="absolute bottom-1 left-0 w-full h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-center"></span>
-              </motion.a>
+                {hoveredLink === link.name && (
+                  <motion.div
+                    layoutId="hover-pill"
+                    className="absolute inset-0 bg-white rounded-full shadow-md"
+                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center gap-2">
+                  <link.icon className="text-blue-500"/>
+                  {link.name}
+                </span>
+              </Link>
             ))}
           </div>
           
           <div className="hidden md:block">
             <motion.a
               href="#"
-              className="bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="font-bold py-3 px-8 rounded-full shadow-lg text-white bg-gradient-to-r from-blue-500 to-sky-500"
+              whileHover={{ 
+                scale: 1.08, 
+                y: -3,
+                boxShadow: "0 10px 20px -5px rgba(245, 158, 11, 0.4)"
+              }}
               whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             >
-              Submit
+              RSVP
             </motion.a>
           </div>
 
           <div className="md:hidden flex items-center">
             <motion.button
               onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-              aria-controls="mobile-menu"
-              aria-expanded={isMobileMenuOpen}
-              className=" p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-900"
+              className="p-2 rounded-md text-slate-800"
               whileTap={{ scale: 0.9 }}
               aria-label="Toggle mobile menu"
             >
+
               <AnimatePresence mode="wait">
                 <motion.div
                   key={isMobileMenuOpen ? 'times' : 'bars'}
@@ -98,7 +126,7 @@ const Navbar = () => {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+                  {isMobileMenuOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
                 </motion.div>
               </AnimatePresence>
             </motion.button>
@@ -110,31 +138,32 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden"
-            id="mobile-menu"
-            variants={menuVariants}
+            className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-lg shadow-xl"
+            variants={mobileMenuVariants}
             initial="hidden"
             animate="visible"
             exit="hidden"
           >
-            <div className="px-2 pt-2 pb-6 space-y-2 sm:px-3">
+            <div className="px-4 pt-4 pb-8 space-y-4">
               {navLinks.map((link) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  variants={linkVariants}
-                  className="text-slate-900 hover:text-black hover:bg-white/10 block px-3 py-3 rounded-md text-base font-semibold text-center"
+                  variants={mobileLinkVariants}
+                  
+                  className="flex items-center justify-center gap-3 text-slate-800 hover:bg-blue-100/50 px-3 py-4 rounded-lg text-lg font-semibold"
                   onClick={() => setMobileMenuOpen(false)}
                 >
+                  <link.icon className="text-blue-500" />
                   {link.name}
                 </motion.a>
               ))}
-              <motion.div variants={linkVariants} className="pt-6 px-5">
+              <motion.div variants={mobileLinkVariants} className="pt-4 px-5">
                  <a
-                  href="forms.hackclub.com"
-                  className="block text-center w-full bg-blue-900 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-blue-800 active:scale-95 transform transition-all duration-300 ease-in-out"
+                  href="#"
+                  className="block text-center w-full bg-gradient-to-r from-blue-500 to-sky-500 text-white font-bold py-4 rounded-full shadow-md active:scale-95 transform transition-transform duration-200"
                 >
-                  Submit
+                  RSVP
                 </a>
               </motion.div>
             </div>
@@ -146,3 +175,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
