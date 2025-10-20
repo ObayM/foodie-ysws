@@ -34,8 +34,8 @@ export default function RulesSection(){
         cards.current.forEach((card, index) => {
             gsap.set(card, {
                 y: index * 20, 
-                scale: 1 - index * 0.01,
-                opacity: index === 0 ? 1 : 0.6,
+                scale: 1 - index * 0.05,
+                opacity: index === 0 ? 1 : 0.4,
             });
         });
 

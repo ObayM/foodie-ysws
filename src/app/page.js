@@ -3,6 +3,8 @@
 import React, { useRef, useEffect } from "react";
 import { ReactLenis } from "lenis/react"; 
 
+import LoadingScreen from '@/components/loading';
+
 import HeroSection from "@/components/hero";
 import HowItWorksSection from "@/components/howItWorks";
 import RulesSection from "@/components/rules";
@@ -16,8 +18,9 @@ export default function Home() {
     if (!lenis) return;
 
     function raf(time) {
-      lenis.raf(time);
 
+      lenis.raf(time);
+      
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
@@ -28,18 +31,20 @@ export default function Home() {
   const lenisOptions = {
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    
     smoothWheel: true,
     touchMultiplier: 1.5,
   };
+
   return (
-    <ReactLenis root options={lenisOptions} ref={lenisRef}>
-      <main>
-        <HeroSection />
-        <HowItWorksSection />
-        <RulesSection />
-        <FAQSection />
-      </main>
-    </ReactLenis>
+    <LoadingScreen>
+      <ReactLenis root options={lenisOptions} ref={lenisRef}>
+        <main className="animate-fade-in" style={{ animation: 'fade-in 1s ease-out forwards' }}>
+          <HeroSection />
+          <HowItWorksSection />
+          <RulesSection />
+          <FAQSection />
+        </main>
+      </ReactLenis>
+    </LoadingScreen>
   );
 }
