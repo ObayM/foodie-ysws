@@ -103,31 +103,31 @@ const [scrollY, setScrollY] = useState(0);
 
   const style1 = {
     transition: 'transform 0.1s linear', 
-    transform: `translateY(${scrollY * -0.1}px) rotate(${7 + scrollY * 0.01}deg)`
+    transform: `translateY(${scrollY * 0.05}px) rotate(${6 + scrollY * 0.01}deg)` //sushi
   };
   
   const style2 = {
     transition: 'transform 0.1s linear',
-    transform: `translateY(${scrollY * 0.05}px) rotate(${13 - scrollY * 0.02}deg)`
+    transform: `translateY(${scrollY * 0.05}px) rotate(${12 - scrollY * 0.02}deg)` //burger
   };
   
   const style3 = {
     transition: 'transform 0.1s linear',
-    transform: `translateX(${scrollY * -0.08}px) rotate(${8 + scrollY * 0.015}deg)`
+    transform: `translateY(${scrollY * -0.05}px) rotate(${8 + scrollY * 0.015}deg)` // pizza
   };
   
   const style4 = {
     transition: 'transform 0.1s linear',
-    transform: `translateY(${scrollY * -0.12}px) rotate(${12 - scrollY * 0.01}deg)`
+    transform: `translateY(${scrollY * -0.05}px) rotate(${10 - scrollY * 0.01}deg)` //shawwerma
   };
 
   return (
     <div className="fixed top-0 left-0 w-full h-full -z-20">
       
       <Image style={style1} className="absolute top-1/8 left-1/12 z-1" width={240} height={240} alt="sushi" src={"/sushi.png"}/>
-      <Image style={style2} className="absolute top-1/7 right-1/14 z-1" width={240} height={240} alt="sushi" src={"/burger.png"}/>
-      <Image style={style3} className="absolute bottom-1/9 left-1/15 z-1" width={240} height={240} alt="sushi" src={"/pizza.png"}/>
-      <Image style={style4} className="absolute bottom-1/10 right-1/16 z-1" width={240} height={240} alt="sushi" src={"/shawwerma.png"}/>
+      <Image style={style2} className="absolute top-1/7 right-1/14 z-1" width={240} height={240} alt="burger" src={"/burger.png"}/>
+      <Image style={style3} className="absolute bottom-1/9 left-1/15 z-1" width={240} height={240} alt="pizza" src={"/pizza.png"}/>
+      <Image style={style4} className="absolute bottom-1/10 right-1/16 z-1" width={240} height={240} alt="shawwerma" src={"/shawwerma.png"}/>
       
       <Canvas>
         <BackgroundShaders />
